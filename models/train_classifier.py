@@ -27,7 +27,7 @@ from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 import pickle
 from sklearn.metrics import confusion_matrix
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, accuracy_score
 from sklearn.ensemble import ExtraTreesClassifier
 import os
 import warnings
@@ -77,8 +77,26 @@ def evaluate_model(model, X_test, Y_test, category_names):
     # predict on test data
     y_pred = model.predict(X_test)
     
+    accuracy = []
+
+    y_testData = pd.DataFrame(Y_test)
+    y_predData = pd.DataFrame(y_pred)
+
+    for col in range(len(y_testData.columns)):
+        accuracy.append(accuracy_score(y_testData[col],y_predData[col]))
+ 		
+    target_colums = (category_names.iloc[:,4:].columns).tolist()
+	
+    acc_score = pd.DataFrame(accuracy,columns=['Accuracy_score'], index=target_colums)
+	
     target_names = (category_names.iloc[:,4:].columns).tolist()
+	
     output = classification_report(Y_test, y_pred, target_names=target_names)
+	
+    print("Accuracy for each category:\n")
+    print(acc_score)
+    
+    print("\n\nPrecision,recall, f1-score and support for each category:\n")
     print(output)
 
 

@@ -11787,7 +11787,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
@@ -11823,7 +11823,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[1]:</div>
+<div class="prompt output_prompt">Out[20]:</div>
 
 
 
@@ -11840,7 +11840,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import libraries</span>
@@ -11865,7 +11865,7 @@ div#notebook {
 <span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="k">import</span> <span class="n">CountVectorizer</span><span class="p">,</span> <span class="n">TfidfTransformer</span>
 <span class="kn">import</span> <span class="nn">pickle</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">confusion_matrix</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">classification_report</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">accuracy_score</span>
 </pre></div>
 
 </div>
@@ -11875,7 +11875,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># load data from database</span>
@@ -11933,7 +11933,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
@@ -11976,7 +11976,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
@@ -12005,7 +12005,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
@@ -12015,6 +12015,29 @@ div#notebook {
 
 <span class="c1"># predict on test data</span>
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">accuracy</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">y_testData</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+<span class="n">y_predData</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_testData</span><span class="o">.</span><span class="n">columns</span><span class="p">)):</span>
+    <span class="n">accuracy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_testData</span><span class="p">[</span><span class="n">col</span><span class="p">],</span><span class="n">y_predData</span><span class="p">[</span><span class="n">col</span><span class="p">]))</span>
+    
+<span class="n">target_colums</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">4</span><span class="p">:]</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="n">acc_score</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">accuracy</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Accuracy_score&#39;</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">target_colums</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12033,7 +12056,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">fxn</span><span class="p">():</span>
@@ -12047,7 +12070,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
@@ -12057,6 +12080,11 @@ div#notebook {
     <span class="n">target_names</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">4</span><span class="p">:]</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 
     <span class="n">output</span> <span class="o">=</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">target_names</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy for each category:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">acc_score</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Precision,recall, f1-score and support for each category:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
 </pre></div>
 
@@ -12074,46 +12102,89 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>                        precision    recall  f1-score   support
+<pre>Accuracy for each category:
 
-               related       0.85      0.92      0.88      5012
-               request       0.79      0.42      0.55      1129
-                 offer       0.00      0.00      0.00        25
-           aid_related       0.75      0.61      0.68      2673
-          medical_help       0.55      0.09      0.16       510
-      medical_products       0.69      0.09      0.16       331
-     search_and_rescue       0.71      0.07      0.13       172
-              security       0.40      0.02      0.03       121
-              military       0.65      0.07      0.13       207
+                        Accuracy_score
+related                       0.807751
+request                       0.885719
+offer                         0.995423
+aid_related                   0.740006
+medical_help                  0.921880
+medical_products              0.951022
+search_and_rescue             0.974062
+security                      0.981233
+military                      0.967806
+child_alone                   1.000000
+water                         0.951480
+food                          0.936222
+shelter                       0.927983
+clothing                      0.985963
+money                         0.978639
+missing_people                0.989777
+refugees                      0.964602
+death                         0.958804
+other_aid                     0.867562
+infrastructure_related        0.934239
+transport                     0.952395
+buildings                     0.951633
+electricity                   0.981996
+tools                         0.994812
+hospitals                     0.989014
+shops                         0.994049
+aid_centers                   0.986726
+other_infrastructure          0.958346
+weather_related               0.859017
+floods                        0.944919
+storm                         0.933781
+fire                          0.989319
+earthquake                    0.967958
+cold                          0.982148
+other_weather                 0.946445
+direct_report                 0.849558
+
+
+Precision,recall, f1-score and support for each category:
+
+                        precision    recall  f1-score   support
+
+               related       0.84      0.92      0.88      4999
+               request       0.80      0.46      0.58      1141
+                 offer       0.00      0.00      0.00        30
+           aid_related       0.75      0.58      0.65      2767
+          medical_help       0.63      0.09      0.16       531
+      medical_products       0.71      0.10      0.18       342
+     search_and_rescue       0.91      0.06      0.11       179
+              security       0.00      0.00      0.00       119
+              military       0.75      0.09      0.17       225
            child_alone       0.00      0.00      0.00         0
-                 water       0.90      0.32      0.47       404
-                  food       0.82      0.51      0.63       717
-               shelter       0.77      0.28      0.41       584
-              clothing       0.62      0.11      0.18       122
-                 money       0.75      0.02      0.04       152
-        missing_people       1.00      0.01      0.02        79
-              refugees       0.59      0.08      0.15       229
-                 death       0.74      0.12      0.20       288
-             other_aid       0.55      0.06      0.10       860
-infrastructure_related       0.35      0.01      0.03       409
-             transport       0.64      0.09      0.15       321
-             buildings       0.75      0.12      0.20       312
-           electricity       0.58      0.13      0.21       145
-                 tools       0.00      0.00      0.00        36
-             hospitals       0.00      0.00      0.00        68
-                 shops       0.00      0.00      0.00        31
-           aid_centers       0.00      0.00      0.00        66
-  other_infrastructure       0.14      0.00      0.01       282
-       weather_related       0.83      0.61      0.70      1812
-                floods       0.90      0.39      0.54       574
-                 storm       0.76      0.47      0.58       623
-                  fire       0.50      0.02      0.03        61
-            earthquake       0.90      0.71      0.80       585
-                  cold       0.66      0.17      0.27       145
-         other_weather       0.33      0.03      0.05       331
-         direct_report       0.74      0.31      0.43      1264
+                 water       0.86      0.32      0.47       434
+                  food       0.83      0.56      0.67       753
+               shelter       0.79      0.32      0.46       617
+              clothing       0.71      0.12      0.21        99
+                 money       1.00      0.03      0.07       145
+        missing_people       0.00      0.00      0.00        67
+              refugees       0.62      0.04      0.08       236
+                 death       0.74      0.19      0.30       308
+             other_aid       0.53      0.06      0.10       873
+infrastructure_related       0.28      0.01      0.02       423
+             transport       0.54      0.07      0.12       315
+             buildings       0.80      0.13      0.22       351
+           electricity       0.82      0.07      0.13       125
+                 tools       0.00      0.00      0.00        34
+             hospitals       0.00      0.00      0.00        71
+                 shops       0.00      0.00      0.00        39
+           aid_centers       0.00      0.00      0.00        87
+  other_infrastructure       0.25      0.01      0.01       269
+       weather_related       0.84      0.60      0.70      1791
+                floods       0.92      0.37      0.53       547
+                 storm       0.75      0.41      0.53       598
+                  fire       1.00      0.01      0.03        71
+            earthquake       0.88      0.74      0.80       571
+                  cold       0.77      0.08      0.15       124
+         other_weather       0.58      0.10      0.17       361
+         direct_report       0.72      0.34      0.46      1238
 
-           avg / total       0.74      0.49      0.55     20680
+           avg / total       0.75      0.49      0.55     20880
 
 </pre>
 </div>
@@ -12134,7 +12205,7 @@ infrastructure_related       0.35      0.01      0.03       409
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Set the parameters</span>
@@ -12162,7 +12233,7 @@ infrastructure_related       0.35      0.01      0.03       409
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
@@ -12193,7 +12264,7 @@ infrastructure_related       0.35      0.01      0.03       409
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=-1)]: Done   8 out of   8 | elapsed: 21.0min finished
+<pre>[Parallel(n_jobs=-1)]: Done   8 out of   8 | elapsed: 21.7min finished
 </pre>
 </div>
 </div>
@@ -12204,17 +12275,45 @@ infrastructure_related       0.35      0.01      0.03       409
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">y_pred2</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">accuracy</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">y_testData</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+<span class="n">y_predData</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">y_pred2</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_testData</span><span class="o">.</span><span class="n">columns</span><span class="p">)):</span>
+    <span class="n">accuracy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_testData</span><span class="p">[</span><span class="n">col</span><span class="p">],</span><span class="n">y_predData</span><span class="p">[</span><span class="n">col</span><span class="p">]))</span>
+    
+<span class="n">target_colums</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">4</span><span class="p">:]</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="n">acc_score</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">accuracy</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Accuracy_score&#39;</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">target_colums</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
     <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
     <span class="n">fxn</span><span class="p">()</span>
-    <span class="n">y_pred2</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-
     <span class="n">target_names</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">4</span><span class="p">:]</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
     
     <span class="n">output</span> <span class="o">=</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred2</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">target_names</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy for each category:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">acc_score</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Precision,recall, f1-score and support for each category:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
 </pre></div>
 
@@ -12232,46 +12331,89 @@ infrastructure_related       0.35      0.01      0.03       409
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>                        precision    recall  f1-score   support
+<pre>Accuracy for each category:
 
-               related       0.85      0.92      0.88      5012
-               request       0.80      0.44      0.56      1129
-                 offer       0.00      0.00      0.00        25
-           aid_related       0.74      0.62      0.68      2673
-          medical_help       0.57      0.11      0.19       510
-      medical_products       0.73      0.08      0.15       331
-     search_and_rescue       0.80      0.05      0.09       172
-              security       0.00      0.00      0.00       121
-              military       0.57      0.12      0.19       207
+                        Accuracy_score
+related                       0.810345
+request                       0.883583
+offer                         0.995423
+aid_related                   0.742295
+medical_help                  0.920507
+medical_products              0.950717
+search_and_rescue             0.974672
+security                      0.981843
+military                      0.966738
+child_alone                   1.000000
+water                         0.943546
+food                          0.923711
+shelter                       0.926762
+clothing                      0.987183
+money                         0.978334
+missing_people                0.989777
+refugees                      0.963839
+death                         0.957736
+other_aid                     0.868325
+infrastructure_related        0.935307
+transport                     0.954226
+buildings                     0.950412
+electricity                   0.981385
+tools                         0.994812
+hospitals                     0.988709
+shops                         0.994049
+aid_centers                   0.986573
+other_infrastructure          0.958651
+weather_related               0.865121
+floods                        0.943393
+storm                         0.928288
+fire                          0.989472
+earthquake                    0.969637
+cold                          0.982453
+other_weather                 0.945987
+direct_report                 0.853525
+
+
+Precision,recall, f1-score and support for each category:
+
+                        precision    recall  f1-score   support
+
+               related       0.84      0.92      0.88      4999
+               request       0.81      0.43      0.56      1141
+                 offer       0.00      0.00      0.00        30
+           aid_related       0.74      0.60      0.66      2767
+          medical_help       0.57      0.08      0.14       531
+      medical_products       0.76      0.08      0.15       342
+     search_and_rescue       0.78      0.10      0.18       179
+              security       0.50      0.01      0.02       119
+              military       0.63      0.08      0.13       225
            child_alone       0.00      0.00      0.00         0
-                 water       0.86      0.31      0.46       404
-                  food       0.79      0.46      0.58       717
-               shelter       0.80      0.27      0.40       584
-              clothing       0.71      0.08      0.15       122
-                 money       1.00      0.03      0.06       152
-        missing_people       0.00      0.00      0.00        79
-              refugees       0.68      0.06      0.10       229
-                 death       0.82      0.22      0.35       288
-             other_aid       0.56      0.05      0.09       860
-infrastructure_related       0.22      0.01      0.02       409
-             transport       0.70      0.08      0.15       321
-             buildings       0.79      0.14      0.24       312
-           electricity       0.75      0.04      0.08       145
-                 tools       0.00      0.00      0.00        36
-             hospitals       0.00      0.00      0.00        68
-                 shops       0.00      0.00      0.00        31
-           aid_centers       0.00      0.00      0.00        66
-  other_infrastructure       0.11      0.00      0.01       282
-       weather_related       0.83      0.61      0.70      1812
-                floods       0.91      0.28      0.43       574
-                 storm       0.77      0.44      0.56       623
-                  fire       0.00      0.00      0.00        61
-            earthquake       0.87      0.58      0.69       585
-                  cold       0.70      0.11      0.19       145
-         other_weather       0.38      0.04      0.07       331
-         direct_report       0.77      0.32      0.45      1264
+                 water       0.86      0.18      0.29       434
+                  food       0.81      0.44      0.57       753
+               shelter       0.81      0.29      0.43       617
+              clothing       0.78      0.21      0.33        99
+                 money       0.71      0.03      0.07       145
+        missing_people       0.00      0.00      0.00        67
+              refugees       0.47      0.03      0.06       236
+                 death       0.76      0.15      0.25       308
+             other_aid       0.56      0.06      0.10       873
+infrastructure_related       0.40      0.00      0.01       423
+             transport       0.74      0.07      0.13       315
+             buildings       0.74      0.11      0.20       351
+           electricity       0.67      0.05      0.09       125
+                 tools       0.00      0.00      0.00        34
+             hospitals       0.00      0.00      0.00        71
+                 shops       0.00      0.00      0.00        39
+           aid_centers       0.00      0.00      0.00        87
+  other_infrastructure       0.38      0.01      0.02       269
+       weather_related       0.85      0.62      0.71      1791
+                floods       0.88      0.37      0.52       547
+                 storm       0.74      0.33      0.46       598
+                  fire       1.00      0.03      0.05        71
+            earthquake       0.89      0.74      0.81       571
+                  cold       0.91      0.08      0.15       124
+         other_weather       0.71      0.03      0.06       361
+         direct_report       0.74      0.35      0.47      1238
 
-           avg / total       0.74      0.48      0.54     20680
+           avg / total       0.75      0.48      0.54     20880
 
 </pre>
 </div>
@@ -12295,7 +12437,7 @@ infrastructure_related       0.22      0.01      0.02       409
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <span class="n">ExtraTreesClassifier</span>
@@ -12320,7 +12462,7 @@ infrastructure_related       0.22      0.01      0.02       409
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pipeline_other</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
@@ -12336,7 +12478,7 @@ infrastructure_related       0.22      0.01      0.02       409
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[30]:</div>
+<div class="prompt output_prompt">Out[45]:</div>
 
 
 
@@ -12360,17 +12502,45 @@ infrastructure_related       0.22      0.01      0.02       409
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">y_pred_other</span> <span class="o">=</span> <span class="n">pipeline_other</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">accuracy</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">y_testData</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+<span class="n">y_predData</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">y_pred_other</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_testData</span><span class="o">.</span><span class="n">columns</span><span class="p">)):</span>
+    <span class="n">accuracy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_testData</span><span class="p">[</span><span class="n">col</span><span class="p">],</span><span class="n">y_predData</span><span class="p">[</span><span class="n">col</span><span class="p">]))</span>
+    
+<span class="n">target_colums</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">4</span><span class="p">:]</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="n">acc_score</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">accuracy</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Accuracy_score&#39;</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">target_colums</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
     <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
     <span class="n">fxn</span><span class="p">()</span>
-    <span class="n">y_pred_other</span> <span class="o">=</span> <span class="n">pipeline_other</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-
     <span class="n">target_names</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">4</span><span class="p">:]</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 
     <span class="n">output</span> <span class="o">=</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_other</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">target_names</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy for each category:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">acc_score</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Precision,recall, f1-score and support for each category:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
 </pre></div>
 
@@ -12388,46 +12558,89 @@ infrastructure_related       0.22      0.01      0.02       409
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>                        precision    recall  f1-score   support
+<pre>Accuracy for each category:
 
-               related       0.86      0.91      0.89      5012
-               request       0.80      0.45      0.58      1129
-                 offer       0.00      0.00      0.00        25
-           aid_related       0.77      0.50      0.60      2673
-          medical_help       0.42      0.02      0.04       510
-      medical_products       0.80      0.04      0.07       331
-     search_and_rescue       0.67      0.02      0.04       172
-              security       0.33      0.01      0.02       121
-              military       0.57      0.06      0.11       207
+                        Accuracy_score
+related                       0.807446
+request                       0.886939
+offer                         0.995423
+aid_related                   0.720171
+medical_help                  0.920201
+medical_products              0.949802
+search_and_rescue             0.972536
+security                      0.981538
+military                      0.967043
+child_alone                   1.000000
+water                         0.949344
+food                          0.919591
+shelter                       0.917913
+clothing                      0.986268
+money                         0.978181
+missing_people                0.990082
+refugees                      0.964144
+death                         0.955142
+other_aid                     0.868935
+infrastructure_related        0.935002
+transport                     0.951938
+buildings                     0.947666
+electricity                   0.981385
+tools                         0.994812
+hospitals                     0.989167
+shops                         0.994049
+aid_centers                   0.986726
+other_infrastructure          0.958651
+weather_related               0.827128
+floods                        0.928288
+storm                         0.923100
+fire                          0.989319
+earthquake                    0.947513
+cold                          0.981538
+other_weather                 0.945529
+direct_report                 0.853677
+
+
+Precision,recall, f1-score and support for each category:
+
+                        precision    recall  f1-score   support
+
+               related       0.85      0.91      0.88      4999
+               request       0.81      0.45      0.58      1141
+                 offer       0.00      0.00      0.00        30
+           aid_related       0.78      0.47      0.59      2767
+          medical_help       0.64      0.03      0.06       531
+      medical_products       0.76      0.06      0.10       342
+     search_and_rescue       0.33      0.01      0.01       179
+              security       0.00      0.00      0.00       119
+              military       0.74      0.06      0.11       225
            child_alone       0.00      0.00      0.00         0
-                 water       0.90      0.30      0.45       404
-                  food       0.86      0.45      0.59       717
-               shelter       0.82      0.23      0.35       584
-              clothing       0.88      0.17      0.29       122
-                 money       1.00      0.03      0.05       152
-        missing_people       0.00      0.00      0.00        79
-              refugees       0.82      0.04      0.07       229
-                 death       0.77      0.06      0.11       288
-             other_aid       0.55      0.07      0.12       860
-infrastructure_related       0.57      0.01      0.02       409
-             transport       0.89      0.02      0.05       321
-             buildings       0.75      0.05      0.09       312
-           electricity       0.00      0.00      0.00       145
-                 tools       0.00      0.00      0.00        36
-             hospitals       0.00      0.00      0.00        68
-                 shops       0.00      0.00      0.00        31
-           aid_centers       0.00      0.00      0.00        66
-  other_infrastructure       0.60      0.01      0.02       282
-       weather_related       0.85      0.49      0.62      1812
-                floods       0.89      0.25      0.38       574
-                 storm       0.73      0.27      0.39       623
-                  fire       0.60      0.05      0.09        61
-            earthquake       0.92      0.52      0.66       585
-                  cold       1.00      0.03      0.07       145
-         other_weather       0.60      0.03      0.05       331
-         direct_report       0.79      0.34      0.48      1264
+                 water       0.86      0.28      0.42       434
+                  food       0.84      0.37      0.51       753
+               shelter       0.76      0.19      0.30       617
+              clothing       0.74      0.14      0.24        99
+                 money       0.67      0.03      0.05       145
+        missing_people       1.00      0.03      0.06        67
+              refugees       0.55      0.03      0.05       236
+                 death       0.73      0.07      0.13       308
+             other_aid       0.58      0.06      0.10       873
+infrastructure_related       0.00      0.00      0.00       423
+             transport       0.50      0.01      0.02       315
+             buildings       0.83      0.03      0.06       351
+           electricity       0.71      0.04      0.08       125
+                 tools       0.00      0.00      0.00        34
+             hospitals       0.00      0.00      0.00        71
+                 shops       0.00      0.00      0.00        39
+           aid_centers       0.00      0.00      0.00        87
+  other_infrastructure       0.00      0.00      0.00       269
+       weather_related       0.84      0.45      0.59      1791
+                floods       0.87      0.16      0.28       547
+                 storm       0.76      0.23      0.35       598
+                  fire       1.00      0.01      0.03        71
+            earthquake       0.86      0.47      0.61       571
+                  cold       0.80      0.03      0.06       124
+         other_weather       0.67      0.02      0.04       361
+         direct_report       0.73      0.36      0.48      1238
 
-           avg / total       0.77      0.44      0.51     20680
+           avg / total       0.74      0.42      0.49     20880
 
 </pre>
 </div>
@@ -12447,7 +12660,7 @@ infrastructure_related       0.57      0.01      0.02       409
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;model.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">))</span>
