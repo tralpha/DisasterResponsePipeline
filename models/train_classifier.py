@@ -35,8 +35,7 @@ import warnings
 def load_data(database_filepath):
     # load data from database
     engine = create_engine('sqlite:///'+database_filepath)
-    filenamedb = database_filepath.split('.')[0]
-    df = pd.read_sql_table(filenamedb, engine)
+    df = pd.read_sql_table("clean_data", engine)
     X = df.message.values
     Y = df.iloc[:, 4:].values
     return X,Y,df
@@ -112,7 +111,7 @@ def main():
     if len(sys.argv) == 3:
         database_filepath, model_filepath = sys.argv[1:]
         print('Loading data...\n    DATABASE: {}'.format(database_filepath))
-        database_filepath = os.path.basename(database_filepath)
+        #database_filepath = os.path.basename(database_filepath)
         X, Y, category_names = load_data(database_filepath)
         X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
         

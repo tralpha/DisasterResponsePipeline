@@ -25,7 +25,7 @@ The first part of my data pipeline is the Extract, Transform, and Load process. 
 
 Note that, `disaster_messages.csv` is the `csv` file to load messages dataset, and `disaster_categories.csv` is the `csv` file to load categories dataset.
 
-To test this part of our project, you must create an empty database  `data/DisasterResponse.db`, and then type  `python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db` as suggested in the instructions part above. After following these steps, a database will be created and will overwrite the empty database you have created manually. The notebook has been completed and the html file (`ETL Pipeline Preparation.html`) has been generated for this part.
+To test this part of our project, type  `python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db` as suggested in the instructions part above. A database will be created. The notebook has been completed and the html file (`ETL Pipeline Preparation.html`) has been generated for this part.
 
 
 #### ML Pipeline
@@ -41,9 +41,8 @@ For the machine learning part, I split the code into a training and test set. Fu
 
 Our model reaches the value 0.74. You can see the pipeline and its improvements in the html file provided. For our `models/train_classifier.py` file, I used the simple model because the precision obtained is good and gives good results.
 
-To test this part, you must create an empty pickle file `models/classifier.pkl`, and then type `python models/train_classifier.py DisasterResponse.db models/classifier.pkl`. After following these steps, a pickle file will be created and will overwrite the empty pickle you have created manually.
+To test this part, type `python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl`. A pickle file will be created.
 
-Further note: I copied the `data/DisasterResponse.db` file in the `models` folder, so to test this part you must type `python models/train_classifier.py DisasterResponse.db models/classifier.pkl` instead of `python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl`.
 
 #### Flask Web App
 This part uses the first two parts and displays the visualizations (scatter and bar chats) of the results returned by the database. The file paths for accessing the database and the pickle file are changed and the graphs are implemented in the `app/run.py` file. To run the app, type `python run.py` and launch on your browser the http://0.0.0.0:3001/ address.
